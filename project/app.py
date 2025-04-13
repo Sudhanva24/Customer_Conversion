@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # Load your trained XGBoost model
 # Replace 'model.pkl' with the actual path to your saved model
 try:
-    model_path = os.path.join(os.path.dirname(__file__), '/Users/sudhanvasavyasachi/Desktop/Projects/Customer_Conversion/project/xgboost_model.pkl')
+    model_path = os.path.join(os.path.dirname(__file__), 'xgboost_model.pkl')
     with open(model_path, 'rb') as file:
         model = pickle.load(file)
 except FileNotFoundError:
