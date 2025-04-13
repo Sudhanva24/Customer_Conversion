@@ -3,6 +3,7 @@ import numpy as np
 import xgboost as xgb
 import pickle
 import os
+import shap
 # Load your trained XGBoost model
 # Replace 'model.pkl' with the actual path to your saved model
 try:
@@ -54,3 +55,12 @@ if st.button("Predict"):
     st.subheader("Prediction")
     st.write(f"The customer will: **{prediction_label}**")
     st.write(f"Conversion Probability: **{probability:.2%}**")
+
+    # Calculate SHAP values
+    explainer = shap.TreeExplainer(model)
+    shap_values = explainer.shap_values(input_data)
+
+    # Display SHAP values waterfall plot
+    st.subheader("SHAP Values Waterfall Plot")
+    shap.initjs()
+    st_shap = st.pyplot(shap.waterfall_plot(explainer.expected_value, shap_values[0], input_data[0]))
